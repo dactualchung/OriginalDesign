@@ -1,6 +1,6 @@
-int diameter = 20;
+float diameter = 20;
 boolean x = true;
-float arc = 0;
+float arcV = 0;
 float offset = PI/16;
 float r = random(0,256);
 float g = random(0,256);
@@ -16,15 +16,10 @@ void draw() {
   fill(255, 255, 255);
   ellipse(200, 200, diameter, diameter);
   fill(r, g, b);
-  arc(200, 200, diameter, diameter, 0.18 + arc, PI/6 + arc);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 4 * offset, PI/6 + arc + 4 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 8 * offset, PI/6 + arc + 8 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 12 * offset, PI/6 + arc + 12 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 16 * offset, PI/6 + arc + 16 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 20 * offset, PI/6 + arc + 20 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 24 * offset, PI/6 + arc + 24 * offset);
-  arc(200, 200, diameter, diameter, 0.18 + arc + 28 * offset, PI/6 + arc + 28 * offset);
-  arc = arc + direction * PI/40;
+  for (int i = 0; i < 8; i++) {
+  	mArc(200, diameter, 0.18, i, offset);
+  }
+  arcV = arcV + direction * PI/40;
   if (x == true) {
     diameter = diameter + 12;
   } else {
@@ -45,4 +40,7 @@ void draw() {
 }
 void mouseWheel(MouseEvent event) {
   direction = event.getCount();
+}
+void mArc(int c, float d, float s, int id, float offset){
+	arc(c, c, d, d, s + arcV + id * 4 * offset, PI/6 + arcV + id * 4 * offset);
 }
