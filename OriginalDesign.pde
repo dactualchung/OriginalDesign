@@ -7,6 +7,7 @@ float g = random(0,256);
 float b = random(0,256);
 float direction = 1.0;
 float stage = 0;
+boolean clicked = true;
 void setup() {
   frameRate(60);
   size(400, 400);
@@ -26,20 +27,26 @@ void draw() {
     diameter = diameter - 12;
     if (diameter <  50) {
       x = true;
-      r = random(0,256);
-      g = random(0,256);
-      b = random(0,256);
+      r = (int)(Math.random()*256);
+      g = (int)(Math.random()*256);
+      b = (int)(Math.random()*256);
     }
   }  
   if (diameter > 350) {
     x = false;
-    r = random(0,256);
-    g = random(0,256);
-    b = random(0,256);
+    r = (int)(Math.random()*256);
+    g = (int)(Math.random()*256);
+    b = (int)(Math.random()*256);
   }
 }
-void mouseWheel(MouseEvent event) {
-  direction = event.getCount();
+void mouseClicked() {
+  if (clicked == true) {
+    direction = -1.0;
+    clicked = false;
+  } else {
+    direction = 1.0;
+    clicked = true;
+  }
 }
 void mArc(int c, float d, float s, int id, float offset){
 	arc(c, c, d, d, s + arcV + id * 4 * offset, PI/6 + arcV + id * 4 * offset);
